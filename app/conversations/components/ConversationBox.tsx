@@ -6,6 +6,7 @@ import { Conversation, Message, User } from "@prisma/client"
 import { format } from "date-fns"
 import { useSession } from "next-auth/react"
 import clsx from "clsx"
+import { MdNotificationsActive } from "react-icons/md"
 
 import Avatar from "@/app/components/Avatar"
 import useOtherUser from "@/app/hooks/useOtherUser"
@@ -93,14 +94,19 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
               </p>
             )}
           </div>
-          <p
-            className={clsx(
-              "truncate text-sm",
-              hasSeen ? "text-gray-500" : "text-black font-medium"
-            )}
-          >
-            {lastMessageText}
-          </p>
+          <div className="flex items-center justify-between">
+            <p
+              className={clsx(
+                "truncate text-sm",
+                hasSeen ? "text-gray-500" : "text-black font-medium"
+              )}
+            >
+              {lastMessageText}
+            </p>
+            {!hasSeen ? (
+              <MdNotificationsActive className="text-gray-900" />
+            ) : null}
+          </div>
         </div>
       </div>
     </div>

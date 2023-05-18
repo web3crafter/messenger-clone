@@ -2,12 +2,16 @@
 
 import clsx from "clsx"
 import Link from "next/link"
+import { User } from "@prisma/client"
+import Avatar from "../Avatar"
 
 interface MobileItemProps {
   href: string
   active?: boolean
   icon: any
   onClick?: () => void
+  setIsModalOpen: (arg0: boolean) => void
+  currentUser: User
 }
 const MobileItem: React.FC<MobileItemProps> = ({
   href,
@@ -22,16 +26,18 @@ const MobileItem: React.FC<MobileItemProps> = ({
   }
 
   return (
-    <Link
-      href={href}
-      onClick={onClick}
-      className={clsx(
-        "group flex gap-x-3 text-sm leading-6 font-semibold w-full justify-center p-4 text-gray-500 hover:text-black hover:bg-gray-100",
-        active && "bg-gray-100 text-black"
-      )}
-    >
-      <Icon />
-    </Link>
+    <>
+      <Link
+        href={href}
+        onClick={handleClick}
+        className={clsx(
+          "group flex gap-x-3 text-sm leading-6 font-semibold w-full justify-center p-4 text-gray-500 hover:text-black hover:bg-gray-100",
+          active && "bg-gray-100 text-black"
+        )}
+      >
+        <Icon className="w-9 h-9 shrink-0" />
+      </Link>
+    </>
   )
 }
 export default MobileItem
